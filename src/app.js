@@ -70,8 +70,10 @@ app.get("/", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something went wrong!");
+  console.error('Error status:', err.status);
+  console.error('Error message:', err.message);
+  console.error('Error stack:', err.stack);
+  res.status(err.status || 500).send("Something went wrong!");
 });
 
 const PORT = process.env.PORT || 3000;
