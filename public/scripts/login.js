@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "index.html"; // Redirect to home page
       } else {
         console.error("Failed to login:", response.status);
+        console.error("Failed to login:", response.statusText);
         // Handle errors, show user feedback
       }
     } catch (error) {
