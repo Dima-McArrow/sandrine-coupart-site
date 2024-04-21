@@ -1,14 +1,10 @@
+// recipeRoutes.js
 const express = require("express");
-const {
-  addRecipe,
-  getAllRecipes,
-  getRecipe,
-} = require("../controllers/recipeController");
-const { protect } = require("../middlewares/authMiddleware");
+const { getAllRecipes, getRecipe } = require("../controllers/recipeController");
+// Removed the protect middleware import since it's not used anymore
 const router = express.Router();
 
-router.post("/", protect, addRecipe);
 router.get("/", getAllRecipes);
-router.get("/:id", getRecipe);
+// router.get("/:id", getRecipe); // Ensure getRecipe is defined or remove this if not needed
 
 module.exports = router;
