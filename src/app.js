@@ -69,6 +69,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "HTML", "index.html"));
 });
 
+// After all other routes
+app.get('*.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Public', 'HTML', req.path));
+});
+
+
 app.use((err, req, res, next) => {
   console.error('Error status:', err.status);
   console.error('Error message:', err.message);
