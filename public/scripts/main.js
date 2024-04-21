@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     ".testims_cards_container"
   );
   try {
-    const response = await fetch("http://localhost:3000/api/testimonials");
+    const response = await fetch("api/testimonials");
     if (response.ok) {
       const testimonials = await response.json();
       testimonials.forEach((testimonial) => {
