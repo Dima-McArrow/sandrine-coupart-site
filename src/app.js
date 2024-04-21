@@ -22,7 +22,7 @@ const allowedOrigins = [
   "http://localhost:3001", // Another client application
   "http://localhost:3000",
   "http://127.0.0.1:5500",
-  "https://yourapp.herokuapp.com", // Production environment
+  "https://sandrine-coupart-site-ac27d881da5c.herokuapp.com/", // Production environment
   // Add more as needed
 ];
 
