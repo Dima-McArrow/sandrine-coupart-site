@@ -1,6 +1,6 @@
 // app.js
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
 const express = require("express");
 const cors = require("cors");
@@ -16,7 +16,7 @@ const recipeRoutes = require("./routes/recipeRoutes");
 const app = express();
 const testimonialRoutes = require("./routes/testimonialRoutes");
 
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 app.use(helmet());
 
@@ -32,10 +32,12 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
+      console.log("Received origin:", origin); // Add this line to log the origin
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request if the origin is in the allowedOrigins list
+        callback(null, true);
       } else {
-        callback(new Error("CORS not allowed from this origin"), false); // Block the request if not in the list
+        console.log("Blocked origin:", origin); // Log blocked origin for debugging
+        callback(new Error("CORS not allowed from this origin"), false);
       }
     },
     credentials: true,
@@ -64,22 +66,20 @@ app.use("/api/auth", authRoutes);
 // app.use("/api/recipes", recipeRoutes);
 app.use("/api", testimonialRoutes);
 
-
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "HTML", "index.html"));
 });
 
 // After all other routes
-app.get('*.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'HTML', req.path));
+app.get("*.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "HTML", req.path));
 });
 
-
 app.use((err, req, res, next) => {
-  console.error('Error status:', err.status);
-  console.error('Error message:', err.message);
-  console.error('Error stack:', err.stack);
+  console.error("Error status:", err.status);
+  console.error("Error message:", err.message);
+  console.error("Error stack:", err.stack);
   res.status(err.status || 500).send("Something went wrong!");
 });
 
