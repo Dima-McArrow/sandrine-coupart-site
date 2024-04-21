@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (window.location.href.endsWith("login.html")) {
         const linkA = document.querySelector("#loginContainer a");
         if (linkA) {
-          linkA.style.color = "#609A7D";  // Apply the style directly
+          linkA.style.color = "#609A7D"; // Apply the style directly
         }
       }
     }
@@ -53,50 +53,56 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (window.location.href.endsWith("login.html")) {
       const linkA = document.querySelector("#loginContainer a");
       if (linkA) {
-        linkA.style.color = "#609A7D";  // Apply the style directly
+        linkA.style.color = "#609A7D"; // Apply the style directly
       }
     }
   }
 
-  // Fetching and displaying testimonials
-  const testimonialsContainer = document.querySelector(
-    ".testims_cards_container"
-  );
-  try {
-    const response = await fetch("api/testimonials");
-    if (response.ok) {
-      const testimonials = await response.json();
-      testimonials.forEach((testimonial) => {
-        const testimonialCard = document.createElement("div");
-        testimonialCard.className = "testim_card";
+  // Fetching and displaying testimonials only on the index.html
+  if (
+    window.location.pathname.endsWith("index.html") ||
+    window.location.pathname === "/"
+  ) {
+    const testimonialsContainer = document.querySelector(
+      ".testims_cards_container"
+    );
+    if (testimonialsContainer) {
+      try {
+        const response = await fetch("api/testimonials");
+        if (response.ok) {
+          const testimonials = await response.json();
+          testimonials.forEach((testimonial) => {
+            const testimonialCard = document.createElement("div");
+            testimonialCard.className = "testim_card";
 
-        const testimonialText = document.createElement("p");
-        testimonialText.className = "testim_text";
-        testimonialText.textContent = `"${testimonial.testimonial}"`;
+            const testimonialText = document.createElement("p");
+            testimonialText.className = "testim_text";
+            testimonialText.textContent = `"${testimonial.testimonial}"`;
 
-        const testimonialAuthor = document.createElement("p");
-        testimonialAuthor.className = "testim_author";
-        testimonialAuthor.textContent = `- ${testimonial.first_name}, ${testimonial.age} ans`;
+            const testimonialAuthor = document.createElement("p");
+            testimonialAuthor.className = "testim_author";
+            testimonialAuthor.textContent = `- ${testimonial.first_name}, ${testimonial.age} ans`;
 
-        testimonialCard.appendChild(testimonialText);
-        testimonialCard.appendChild(testimonialAuthor);
+            testimonialCard.appendChild(testimonialText);
+            testimonialCard.appendChild(testimonialAuthor);
 
-        testimonialsContainer.appendChild(testimonialCard);
-      });
-    } else {
-      console.error("Failed to fetch testimonials:", response.status);
+            testimonialsContainer.appendChild(testimonialCard);
+          });
+        } else {
+          console.error("Failed to fetch testimonials:", response.status);
+        }
+      } catch (error) {
+        console.error("Network error:", error);
+      }
     }
-  } catch (error) {
-    console.error("Network error:", error);
   }
 
-  
 });
 
 const returnButton = document.querySelector(".button_return");
-  if (returnButton) {
-    returnButton.addEventListener("click", function () {
-      console.log("Return button clicked");
-      window.location.href = "index.html";
-    });
-  }
+if (returnButton) {
+  returnButton.addEventListener("click", function () {
+    console.log("Return button clicked");
+    window.location.href = "index.html";
+  });
+}

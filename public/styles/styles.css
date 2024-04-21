@@ -34,7 +34,10 @@ footer div.footer p {
   font-family: "Noto Sans", sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: #666;
+  color: #609A7D;
+}
+footer div.footer p span {
+  color: #0C0920;
 }
 footer div.footer .contacts {
   display: flex;
