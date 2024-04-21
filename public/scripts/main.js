@@ -40,10 +40,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       loginContainer.appendChild(logoutButton);
     } else {
       loginContainer.innerHTML = '<a href="login.html">Login</a>';
+      if (window.location.href.endsWith("login.html")) {
+        const linkA = document.querySelector("#loginContainer a");
+        if (linkA) {
+          linkA.style.color = "#609A7D";  // Apply the style directly
+        }
+      }
     }
   } catch (e) {
     console.error("Error parsing user data:", e);
     loginContainer.innerHTML = '<a href="login.html">Login</a>';
+    if (window.location.href.endsWith("login.html")) {
+      const linkA = document.querySelector("#loginContainer a");
+      if (linkA) {
+        linkA.style.color = "#609A7D";  // Apply the style directly
+      }
+    }
   }
 
   // Fetching and displaying testimonials
@@ -77,4 +89,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   } catch (error) {
     console.error("Network error:", error);
   }
+
+  
 });
+
+const returnButton = document.querySelector(".button_return");
+  if (returnButton) {
+    returnButton.addEventListener("click", function () {
+      console.log("Return button clicked");
+      window.location.href = "index.html";
+    });
+  }

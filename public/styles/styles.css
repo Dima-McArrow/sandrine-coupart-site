@@ -434,6 +434,14 @@ p {
   color: #609A7D;
 }
 
+.warm_title_register {
+  font-family: "Reenie Beanie", cursive;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #DC9A7D;
+  margin-left: 50px;
+}
+
 .register_form_wrapper {
   display: flex;
   flex-direction: column;
