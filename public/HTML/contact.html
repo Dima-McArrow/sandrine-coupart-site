@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <title>Contact</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Sandrine Coupart <span class="who_is">diététicienne-nutritionniste</span></h1>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="recipes.html">Recipes</a>
+        <a class="whereami">Contact</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </header>
+    <main>
+      <section class="contact_form_wrapper">
+        <h2 class="warm_title_contact">Contactez-moi</h2>
+        <form id="contactForm" class="contact_form">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
+    
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
+    
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+    
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea>
+    
+          <input type="submit" value="Envoyer">
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>Coordonnées et mentions légales</p>
+      <div class="footer">
+        <div class="contacts">
+          <div class="phone">
+            <p>Phone: 06 12 34 56 78</p>
+          </div>
+          <div class="email">
+            <p>Email: sandrine.coupart@mail.com</p>
+          </div>
+          <div class="address">
+            <p>Adresse:</p>
+          </div>
+        </div>
+        <div class="useful_links">
+          <div class="useful_links_links">
+            <p>mentions légales</p>
+            <p>politique de confidentialité</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="contact.js"></script>
+  </body>
+</html>

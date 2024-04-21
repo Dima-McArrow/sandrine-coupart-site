@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <title>Register</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Sandrine Coupart <span class="who_is">diététicienne-nutritionniste</span></h1>
+    </header>
+    <main>
+      <section class="register_form_wrapper">
+        <h2>Creez votre compte</h2>
+        <form id="registerForm" class="register_form">
+          <label for="first_name">Prenom :</label>
+          <input type="text" id="first_name" required />
+          <label for="last_name">Nom :</label>
+          <input type="text" id="last_name" required />
+          <label for="birthday">Date de naissance :</label>
+          <input type="date" id="birthday" name="birthday" required>
+          <label for="email">Email :</label>
+          <input type="email" id="email" required />
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" required />
+          <input type="submit" value="S'inscrire">
+        </form>
+        <p>Vous avez déjà un compte ? <a href="login.html">Se connecter</a></p>
+        <div class="return_button_wrapper">
+          <input type="button" value="Retour à la page d'accueil" class="button_return_style button_return">
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Coordonnées et mentions légales</p>
+      <div class="footer">
+        <div class="contacts">
+          <div class="phone">
+            <p>Phone: 06 12 34 56 78</p>
+          </div>
+          <div class="email">
+            <p>Email: sandrine.coupart@mail.com</p>
+          </div>
+          <div class="address">
+            <p>Adresse:</p>
+          </div>
+        </div>
+        <div class="useful_links">
+          <div class="useful_links_links">
+            <p>mentions légales</p>
+            <p>politique de confidentialité</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
