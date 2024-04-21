@@ -16,6 +16,7 @@ const recipeRoutes = require("./routes/recipeRoutes");
 const app = express();
 const testimonialRoutes = require("./routes/testimonialRoutes");
 
+app.set('trust proxy', 1);
 
 app.use(helmet());
 
