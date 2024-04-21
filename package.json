@@ -1,7 +1,7 @@
 {
   "name": "sandrine-coupart-site",
   "version": "1.0.0",
-  "main": "public/scripts/main.js",
+  "main": "public/HTML/index.html",
   "scripts": {
     "start": "node src/app.js",
     "sass": "sass --watch SASS/styles.scss:public/styles/styles.css",
