@@ -71,7 +71,7 @@ app.get("/", (req, res) => {
 
 // After all other routes
 app.get('*.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'Public', 'HTML', req.path));
+  res.sendFile(path.join(__dirname, '..', 'public', 'HTML', req.path));
 });
 
 
