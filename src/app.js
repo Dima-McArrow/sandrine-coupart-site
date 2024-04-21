@@ -18,7 +18,20 @@ const testimonialRoutes = require("./routes/testimonialRoutes");
 
 app.set("trust proxy", 1);
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com",
+        ],
+      },
+    },
+  })
+);
 
 const allowedOrigins = [
   "http://localhost:5500", // Your current frontend
