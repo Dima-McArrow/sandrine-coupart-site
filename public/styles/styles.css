@@ -212,6 +212,12 @@ div.testims_cards_container {
   color: #BDB9B3;
   text-align: center;
 }
+.testim_card .testim_author {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  color: #609A7D;
+  text-align: center;
+}
 
 div.services_cards_container {
   display: flex;
