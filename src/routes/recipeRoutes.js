@@ -1,7 +1,6 @@
 // recipeRoutes.js
 const express = require("express");
 const { getAllRecipes, getRecipe } = require("../controllers/recipeController");
-// Removed the protect middleware import since it's not used anymore
 const router = express.Router();
 
 router.get("/", getAllRecipes);
