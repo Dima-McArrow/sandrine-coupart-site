@@ -96,7 +96,7 @@ async function fetchAndDisplayTestimonials() {
   );
   if (testimonialsContainer) {
     try {
-      const response = await fetch("api/testimonials");
+      const response = await fetch("/api/testimonials");
       if (response.ok) {
         const testimonials = await response.json();
         testimonialsContainer.innerHTML = ""; // Clear previous testimonials

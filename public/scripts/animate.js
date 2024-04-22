@@ -23,7 +23,6 @@ window.onload = function () {
       const container = element.querySelector(".service_card");
 
       element.addEventListener("mouseenter", function () {
-        console.log("mouse in");
 
         hrTop.style.top = "-100%";
         hrBottom.style.top = "-100%";
@@ -37,7 +36,6 @@ window.onload = function () {
       });
 
       element.addEventListener("mouseleave", function () {
-        console.log("mouse out");
 
         hrTop.style.top = "30%";
         hrBottom.style.top = "30%";
