@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       const userNameDisplay = document.createElement("span");
       userNameDisplay.textContent = `${user.name} 🟢 `;
+      userNameDisplay.classList.add("user_name");
       loginContainer.appendChild(userNameDisplay);
 
       const logoutButton = document.createElement("button");
