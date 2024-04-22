@@ -299,6 +299,7 @@ div.services_cards_container {
 body {
   background-color: #F3F3F7;
   overflow-x: hidden;
+  width: 100%;
 }
 
 h1 {
@@ -314,13 +315,6 @@ h2 {
   font-size: 16px;
   line-height: 1.5;
   color: #0C0920;
-}
-
-p {
-  font-family: "Noto Sans", sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #666;
 }
 
 .main_pic {
@@ -341,7 +335,7 @@ p {
 .the_pres_one {
   position: absolute;
   top: 13%;
-  left: 10%;
+  left: 15%;
   opacity: 0;
   transition: all 2s;
   font-family: "Noto Sans", sans-serif;
@@ -359,7 +353,7 @@ p {
   width: 20%;
   position: absolute;
   top: 23%;
-  right: 3%;
+  right: 5%;
   font-family: "Noto Sans", sans-serif;
   font-size: 24px;
   color: #DC9A7D;
@@ -420,6 +414,7 @@ p {
 
 body {
   overflow-x: hidden;
+  width: 100%;
 }
 
 .warm_title_contact {
@@ -480,6 +475,7 @@ body {
 
 body {
   overflow-x: hidden;
+  width: 100%;
 }
 
 .warm_title_login {
@@ -540,6 +536,7 @@ body {
 
 body {
   overflow-x: hidden;
+  width: 100%;
 }
 
 .warm_title_register {
@@ -626,6 +623,7 @@ body {
 
 body {
   overflow-x: hidden;
+  width: 100%;
 }
 
 #recipesList {
@@ -638,6 +636,7 @@ body {
 
 body {
   overflow-x: hidden;
+  width: 100%;
 }
 body .page_body_text {
   padding: 0rem 7rem;

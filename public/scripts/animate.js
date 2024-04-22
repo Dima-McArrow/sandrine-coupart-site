@@ -3,7 +3,7 @@ window.onload = function () {
     setTimeout(function () {
       const parTwo = document.querySelector(".the_pres_one");
       if (parTwo) {
-        parTwo.style.left = "1.5%";
+        parTwo.style.left = "4.5%";
         parTwo.style.opacity = "1";
       }
     }, 700);
