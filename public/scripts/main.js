@@ -103,7 +103,7 @@ async function fetchAndDisplayTestimonials() {
         testimonials.forEach((testimonial) => {
           const testimonialCard = document.createElement("div");
           testimonialCard.className = "testim_card";
-          testimonialCard.innerHTML = `<p class="testim_text">"${testimonial.testimonial}"</p><p class="testim_author">- ${testimonial.first_name}, ${testimonial.age} ans</p>`;
+          testimonialCard.innerHTML = `<p class="testim_text">"${testimonial.testimonial}"</p><p class="testim_author">${testimonial.first_name}, ${testimonial.age} ans</p>`;
           testimonialsContainer.appendChild(testimonialCard);
         });
       } else {
