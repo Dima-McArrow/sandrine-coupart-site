@@ -99,50 +99,62 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   } */
 
-  // Function to fetch and display testimonials
   async function fetchAndDisplayTestimonials() {
     const testimonialsContainer = document.querySelector(
       ".testims_cards_container"
     );
-    if (testimonialsContainer) {
-      try {
-        const response = await fetch("api/testimonials");
-        if (response.ok) {
-          const testimonials = await response.json();
-          testimonials.forEach((testimonial) => {
-            const testimonialCard = document.createElement("div");
-            testimonialCard.className = "testim_card";
+    if (!testimonialsContainer) {
+      console.log("Testimonials container not found.");
+      return;
+    }
 
-            const testimonialText = document.createElement("p");
-            testimonialText.className = "testim_text";
-            testimonialText.textContent = `"${testimonial.testimonial}"`;
+    try {
+      const response = await fetch("api/testimonials");
+      if (response.ok) {
+        const testimonials = await response.json();
+        testimonialsContainer.innerHTML = ""; // Clear previous testimonials
+        testimonials.forEach((testimonial) => {
+          const testimonialCard = document.createElement("div");
+          testimonialCard.className = "testim_card";
 
-            const testimonialAuthor = document.createElement("p");
-            testimonialAuthor.className = "testim_author";
-            testimonialAuthor.textContent = `- ${testimonial.first_name}, ${testimonial.age} ans`;
+          const testimonialText = document.createElement("p");
+          testimonialText.className = "testim_text";
+          testimonialText.textContent = `"${testimonial.testimonial}"`;
 
-            testimonialCard.appendChild(testimonialText);
-            testimonialCard.appendChild(testimonialAuthor);
+          const testimonialAuthor = document.createElement("p");
+          testimonialAuthor.className = "testim_author";
+          testimonialAuthor.textContent = `- ${testimonial.first_name}, ${testimonial.age} ans`;
 
-            testimonialsContainer.appendChild(testimonialCard);
-          });
-        } else {
-          console.error("Failed to fetch testimonials:", response.status);
-        }
-      } catch (error) {
-        console.error("Network error:", error);
+          testimonialCard.appendChild(testimonialText);
+          testimonialCard.appendChild(testimonialAuthor);
+
+          testimonialsContainer.appendChild(testimonialCard);
+        });
+      } else {
+        console.error(
+          "Failed to fetch testimonials: HTTP status",
+          response.status
+        );
       }
+    } catch (error) {
+      console.error("Network error while fetching testimonials:", error);
     }
   }
 
-  // Checking if on the index page and setting up interval
   document.addEventListener("DOMContentLoaded", function () {
+    const pathname = window.location.pathname;
+    console.log("Current path:", pathname);
+
     if (
-      window.location.pathname.endsWith("index.html") ||
-      window.location.pathname === "/"
+      pathname.endsWith("index.html") ||
+      pathname === "/" ||
+      pathname === ""
     ) {
+      console.log("Index page detected.");
       fetchAndDisplayTestimonials(); // Call immediately
-      setInterval(fetchAndDisplayTestimonials, 600000); // 600000 ms = 10 minutes
+      setInterval(fetchAndDisplayTestimonials, 600000); // Refresh every 10 minutes
+    } else {
+      console.log("Not on the index page, no testimonials fetch setup.");
     }
   });
 });
