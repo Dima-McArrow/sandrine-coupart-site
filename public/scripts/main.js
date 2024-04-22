@@ -28,11 +28,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       loginContainer.innerHTML = "";
 
       const userNameDisplay = document.createElement("span");
-      userNameDisplay.textContent = `${user.name} (connected) `;
+      userNameDisplay.textContent = `${user.name} 🟢 `;
       loginContainer.appendChild(userNameDisplay);
 
       const logoutButton = document.createElement("button");
       logoutButton.textContent = "Logout";
+      logoutButton.classList.add("logout_button");
       logoutButton.onclick = function () {
         localStorage.removeItem("user");
         window.location.href = "login.html";
