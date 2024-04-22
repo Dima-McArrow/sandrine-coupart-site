@@ -206,6 +206,12 @@ div.testims_cards_container {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transition: all 0.5s;
 }
+.testim_card .testim_text {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  color: #BDB9B3;
+  text-align: center;
+}
 
 div.services_cards_container {
   display: flex;
