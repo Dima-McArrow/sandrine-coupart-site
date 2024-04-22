@@ -17,6 +17,7 @@ footer p.footer_par {
   line-height: 1.5;
   color: #0C0920;
   padding-top: 30px;
+  margin-bottom: 33px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -115,6 +116,7 @@ footer div.footer .useful_links_links a {
 }
 footer div.footer .useful_links_links a p {
   color: #0C0920;
+  margin-bottom: 10px;
 }
 
 nav {
@@ -626,6 +628,22 @@ body {
 }
 
 #recipesList {
+  min-height: 70vh;
+}
+
+.centered {
+  text-align: center;
+}
+
+body {
+  overflow-x: hidden;
+}
+body .page_body_text {
+  padding: 0rem 7rem;
+}
+
+.ateliers {
+  padding: 5rem 7rem;
   min-height: 70vh;
 }
 

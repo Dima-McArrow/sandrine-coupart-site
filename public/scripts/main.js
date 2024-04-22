@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  // Fetching and displaying testimonials only on the index.html
+  /* // Fetching and displaying testimonials only on the index.html
   if (
     window.location.pathname.endsWith("index.html") ||
     window.location.pathname === "/"
@@ -97,8 +97,54 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Network error:", error);
       }
     }
+  } */
+
+  // Function to fetch and display testimonials
+  async function fetchAndDisplayTestimonials() {
+    const testimonialsContainer = document.querySelector(
+      ".testims_cards_container"
+    );
+    if (testimonialsContainer) {
+      try {
+        const response = await fetch("api/testimonials");
+        if (response.ok) {
+          const testimonials = await response.json();
+          testimonials.forEach((testimonial) => {
+            const testimonialCard = document.createElement("div");
+            testimonialCard.className = "testim_card";
+
+            const testimonialText = document.createElement("p");
+            testimonialText.className = "testim_text";
+            testimonialText.textContent = `"${testimonial.testimonial}"`;
+
+            const testimonialAuthor = document.createElement("p");
+            testimonialAuthor.className = "testim_author";
+            testimonialAuthor.textContent = `- ${testimonial.first_name}, ${testimonial.age} ans`;
+
+            testimonialCard.appendChild(testimonialText);
+            testimonialCard.appendChild(testimonialAuthor);
+
+            testimonialsContainer.appendChild(testimonialCard);
+          });
+        } else {
+          console.error("Failed to fetch testimonials:", response.status);
+        }
+      } catch (error) {
+        console.error("Network error:", error);
+      }
+    }
   }
 
+  // Checking if on the index page and setting up interval
+  document.addEventListener("DOMContentLoaded", function () {
+    if (
+      window.location.pathname.endsWith("index.html") ||
+      window.location.pathname === "/"
+    ) {
+      fetchAndDisplayTestimonials(); // Call immediately
+      setInterval(fetchAndDisplayTestimonials, 600000); // 600000 ms = 10 minutes
+    }
+  });
 });
 
 const returnButton = document.querySelector(".button_return");
