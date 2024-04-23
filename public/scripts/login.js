@@ -1,4 +1,5 @@
 // login.js
+
 document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.getElementById("loginForm");
   loginForm.addEventListener("submit", async function (event) {
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = document.getElementById("password").value;
 
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch(`${config.API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

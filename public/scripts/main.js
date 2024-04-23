@@ -1,3 +1,8 @@
+let config = {
+  API_BASE_URL:
+    window.location.hostname === "localhost" ? "http://localhost:3000" : "",
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   console.info("DOM loaded");
 
@@ -15,11 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Update user login status on all pages
   updateUserStatus();
 
+  console.log("Current Page:", currentPage);
+
   // Fetch and display testimonials only on the index page
   if (
     currentPage.endsWith("index.html") ||
     currentPage === "/" ||
-    currentPage === ""
+    currentPage === "" ||
+    currentPage === "/public/HTML/"
   ) {
     fetchAndDisplayTestimonials();
     setInterval(fetchAndDisplayTestimonials, 600000); // Refresh every 10 minutes
@@ -90,15 +98,23 @@ function styleLoginLinkOnLoginPage() {
   }
 }
 
+console.info("fetchAndDisplayTestimonials function should start here");
+
 async function fetchAndDisplayTestimonials() {
   const testimonialsContainer = document.querySelector(
     ".testims_cards_container"
   );
   if (testimonialsContainer) {
+    console.log(
+      "Fetching testimonials from:",
+      `${config.API_BASE_URL}/api/testimonials`
+    );
     try {
-      const response = await fetch("/api/testimonials");
+      const response = await fetch(`${config.API_BASE_URL}/api/testimonials`);
+      console.log("Response received:", response);
       if (response.ok) {
         const testimonials = await response.json();
+        console.log("Testimonials:", testimonials);
         testimonialsContainer.innerHTML = ""; // Clear previous testimonials
         testimonials.forEach((testimonial) => {
           const testimonialCard = document.createElement("div");
@@ -107,10 +123,15 @@ async function fetchAndDisplayTestimonials() {
           testimonialsContainer.appendChild(testimonialCard);
         });
       } else {
-        console.error("Failed to fetch testimonials:", response.status);
+        console.error(
+          "Failed to fetch testimonials:",
+          response.status,
+          response.statusText
+        );
+        console.error("Response payload:", await response.text()); // To see the error message from the server
       }
     } catch (error) {
-      console.error("Network error while fetching testimonials:", error);
+      console.error("Error fetching testimonials:", error);
     }
   }
 }
