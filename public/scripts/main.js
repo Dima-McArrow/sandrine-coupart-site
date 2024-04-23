@@ -1,3 +1,5 @@
+// main.js
+
 let config = {
   API_BASE_URL:
     window.location.hostname === "localhost" ? "http://localhost:3000" : "",
@@ -8,17 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const currentPage = window.location.pathname;
 
-  // Handle login and registration forms only on specific pages
-  if (
-    currentPage.endsWith("login.html") ||
-    currentPage.endsWith("register.html")
-  ) {
-    handleLoginForm();
-    handleRegisterForm();
-  }
 
-  // Update user login status on all pages
+  const loginContainer = document.getElementById("loginContainer");
+if (loginContainer) {
   updateUserStatus();
+}
 
   console.log("Current Page:", currentPage);
 
@@ -34,25 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function handleLoginForm() {
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      // Implement AJAX request for login
-    });
-  }
-}
-
-function handleRegisterForm() {
-  const registerForm = document.getElementById("registerForm");
-  if (registerForm) {
-    registerForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      // Implement AJAX request for registration
-    });
-  }
-}
 
 function updateUserStatus() {
   try {
@@ -71,7 +48,6 @@ function updateUserStatus() {
 function displayLoggedInUser(user) {
   const loginContainer = document.getElementById("loginContainer");
   loginContainer.innerHTML = `<span class="user_name">${user.name} 🟢</span>`;
-
   const logoutButton = document.createElement("button");
   logoutButton.textContent = "Logout";
   logoutButton.classList.add("logout_button");

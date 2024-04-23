@@ -24,8 +24,8 @@
         <div class="contact_image_wrapper">
           <img class="contact_image" src="https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/contact.jpg" alt="Sandrine Coupart Nutrition">
         </div>
-        <form id="contactForm" class="contact_form">
-          <label for="firstName">Prenom :</label>
+        <form id="contactForm" class="contact_form" action="http://localhost:3000/api/messages/contact" method="POST">
+          <label for="firstName">Prénom :</label>
           <input type="text" id="firstName" name="firstName" required />
     
           <label for="lastName">Nom :</label>
@@ -97,11 +97,12 @@
         <div class="useful_links">
           <div class="useful_links_links">
             <a href="mc.html"><p>mentions légales</p></a>
-            <a href="http://"><p>politique de confidentialité</p></a>
+            <a href="pc.html"><p>politique de confidentialité</p></a>
           </div>
         </div>
       </div>
     </footer>
     <script src="../scripts/main.js"></script>
+    <script src="../scripts/contact.js"></script>
   </body>
 </html>

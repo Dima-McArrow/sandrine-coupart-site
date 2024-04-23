@@ -1,7 +1,5 @@
-// ok.js
-
 document.addEventListener("DOMContentLoaded", function() {
   setTimeout(function() {
-      window.location.replace("/index.html");
+      window.location.replace("/public/HTML/login.html");
   }, 2000);
 });

@@ -15,6 +15,7 @@ const recipeRoutes = require("./routes/recipeRoutes");
 
 const app = express();
 const testimonialRoutes = require("./routes/testimonialRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 
 app.set("trust proxy", 1);
 
@@ -23,11 +24,14 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "default-src": ["'self'"],
+        "script-src": ["'self'", "'unsafe-inline'"],
         "img-src": [
           "'self'",
           "data:",
           "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com",
         ],
+        // Add more as necessary
       },
     },
   })
@@ -62,7 +66,7 @@ app.use(
 );
 
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(
@@ -73,23 +77,29 @@ app.use(
     legacyHeaders: false,
   })
 );
+
 app.use(morgan("combined"));
+
 
 app.use("/api/auth", authRoutes);
 // app.use("/api/recipes", recipeRoutes);
 app.use("/api", testimonialRoutes);
+app.use("/api/messages", messageRoutes);
 
-app.use(express.static(path.join(__dirname, "..", "public")));
+
+// After all other routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "HTML", "index.html"));
 });
-
-// After all other routes
 app.get("*.html", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "HTML", req.path));
 });
 
+app.use(express.static(path.join(__dirname, "..", "public")));
+
 app.use((err, req, res, next) => {
+  console.log(`req meth, req url: ${req.method} ${req.url}`);
+  next();
   console.error("Error status:", err.status);
   console.error("Error message:", err.message);
   console.error("Error stack:", err.stack);
