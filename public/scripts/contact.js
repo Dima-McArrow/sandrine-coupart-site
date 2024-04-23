@@ -1,6 +1,5 @@
 // contact.js
 
-// contact.js
 document
   .getElementById("contactForm")
   .addEventListener("submit", function (event) {
