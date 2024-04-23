@@ -3,7 +3,7 @@ const buttonConsult = document.querySelector('.button_consult');
 buttonConsult.addEventListener('click', e => {
   e.preventDefault()
   e.stopPropagation()
-  window.location.href = '/HTML/consultations.html'
+  window.location.href = '/consultations.html'
 })
 
 const buttonAtelier = document.querySelector('.button_atelier');
