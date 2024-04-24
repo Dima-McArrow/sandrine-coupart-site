@@ -330,7 +330,7 @@ h2 {
 }
 
 .main_pic {
-  width: 100vw;
+  width: 100%;
   height: auto;
 }
 
@@ -642,13 +642,12 @@ body {
 }
 
 #recipesList {
-  margin-top: 3rem;
+  margin-top: 9rem;
   margin-bottom: 5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin: 5rem 5rem;
 }
 #recipesList .recipe_card {
   width: 30rem;
@@ -720,7 +719,7 @@ body {
 }
 
 .recipes_title {
-  margin-bottom: 13rem;
+  margin-bottom: 2rem;
 }
 
 body {
@@ -781,6 +780,29 @@ body .page_body_text {
   font-family: "Reenie Beanie", cursive;
   color: #0C0920;
   font-size: 2rem;
+}
+
+body {
+  background-color: #F3F3F7;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#recipeDetailContainer {
+  background-color: #F3F3F7;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+#recipeDetailContainer .recipe_details_pic {
+  width: 50%;
+  height: auto;
 }
 
 /*# sourceMappingURL=styles.css.map */

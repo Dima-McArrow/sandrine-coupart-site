@@ -1,6 +1,6 @@
 // main.js
 
-let config = {
+const config = {
   API_BASE_URL:
     window.location.hostname === "localhost" ? "http://localhost:3000" : "",
 };
@@ -10,11 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const currentPage = window.location.pathname;
 
-
   const loginContainer = document.getElementById("loginContainer");
-if (loginContainer) {
-  updateUserStatus();
-}
+  if (loginContainer) {
+    updateUserStatus();
+  }
 
   console.log("Current Page:", currentPage);
 
@@ -30,9 +29,9 @@ if (loginContainer) {
   }
   if (document.querySelector(".recipes_common_wrapper")) {
     fetchAndDisplayRecipes(); // Call this function if we're on the recipes page
+    setInterval(fetchAndDisplayRecipes, 300000);
   }
 });
-
 
 function updateUserStatus() {
   try {
@@ -72,7 +71,7 @@ function styleLoginLinkOnLoginPage() {
   if (currentPage.endsWith("login.html")) {
     const linkA = document.querySelector("#loginContainer a");
     if (linkA) {
-      linkA.style.color = "#609A7D"; // Apply the style directly
+      linkA.style.color = "#609A7D";
     }
   }
 }
@@ -115,30 +114,42 @@ async function fetchAndDisplayTestimonials() {
   }
 }
 
-
 async function fetchAndDisplayRecipes() {
-  const recipesContainer = document.querySelector(
-    ".recipes_container"
-  );
+  const recipesContainer = document.querySelector(".recipes_container");
   if (recipesContainer) {
-    console.log(
-      "Fetching recipes from:",
-      `${config.API_BASE_URL}/api/recipes`
-    );
+    console.log("Fetching recipes from:", `${config.API_BASE_URL}/api/recipes`);
     try {
       const response = await fetch(`${config.API_BASE_URL}/api/recipes`);
       console.log("Response received:", response);
       if (response.ok) {
         const recipes = await response.json();
         console.log("Recipes:", recipes);
-        recipesContainer.innerHTML = ""; // Clear previous testimonials
-        recipes.forEach((recipe) => {
+
+        // Shuffle the recipes array and slice the first 3 items
+        const shuffled = recipes.sort(() => 0.5 - Math.random());
+        const selectedRecipes = shuffled.slice(0, 3);
+
+        recipesContainer.innerHTML = ""; // Clear previous recipes
+        selectedRecipes.forEach((recipe) => {
           const recipeCard = document.createElement("div");
           recipeCard.className = "recipe_card";
-          recipeCard.innerHTML = `<img class="recipe_card_image" src="${recipe.image_url}" alt=""></img><h3 class="recipe_title">${recipe.title}</h3><p class="recipe_description">${recipe.description}</p><div class="recipe_card_button_wrapper">
-          <input type="button" value="Details" class="recipe_card_button button_nutrition">
-        </div>`;
+          recipeCard.innerHTML = `
+            <img class="recipe_card_image" src="${recipe.image_url}" alt="${recipe.title}">
+            <h3 class="recipe_title">${recipe.title}</h3>
+            <p class="recipe_description">${recipe.description}</p>
+            <div class="recipe_card_button_wrapper">
+            <input type="button" value="Details" class="recipe_card_button button_nutrition">
+            </div>
+          `;
           recipesContainer.appendChild(recipeCard);
+
+          // Event listener for the 'Details' button
+          const detailsButton = recipeCard.querySelector(".recipe_card_button");
+          detailsButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = `recipe_details.html?id=${recipe.id}`;
+          });
         });
       } else {
         console.error(

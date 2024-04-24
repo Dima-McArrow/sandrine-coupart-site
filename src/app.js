@@ -19,7 +19,7 @@ const messageRoutes = require("./routes/messageRoutes");
 
 app.set("trust proxy", 1);
 
-app.use(
+/* app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
@@ -31,6 +31,25 @@ app.use(
           "data:",
           "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com",
         ],
+      },
+    },
+  })
+); */
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"], // adjust if you have specific external scripts
+        styleSrc: ["'self'", "'unsafe-inline'"], // adjust accordingly
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com",
+          "http://localhost:5500",
+        ], // allow images from these sources
+        connectSrc: ["'self'", "http://localhost:3000"], // ensure API requests are allowed
       },
     },
   })
@@ -78,12 +97,10 @@ app.use(
 
 app.use(morgan("combined"));
 
-
 app.use("/api/auth", authRoutes);
 app.use("/api", recipeRoutes);
 app.use("/api", testimonialRoutes);
 app.use("/api/messages", messageRoutes);
-
 
 // After all other routes
 app.get("/", (req, res) => {

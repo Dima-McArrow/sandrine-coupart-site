@@ -30,7 +30,7 @@ exports.login = async (req, res) => {
     res.json({
       message: "Login successful",
       userId: user.id,
-      name: user.first_name, // Assuming 'firstName' is a field in your Users table
+      name: user.first_name,
     });
   } catch (error) {
     res.status(500).json({ message: "Error logging in", error: error.message });
