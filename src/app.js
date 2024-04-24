@@ -31,25 +31,23 @@ app.use(
           "data:",
           "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com",
         ],
-        // Add more as necessary
       },
     },
   })
 );
 
 const allowedOrigins = [
-  "http://localhost:5500", // Your current frontend
-  "http://localhost:3001", // Another client application
+  "http://localhost:5500",
+  "http://localhost:3001",
   "http://localhost:3000",
   "http://127.0.0.1:5500",
   "https://sandrine-coupart-site-b014ac181df6.herokuapp.com", // Production environment
-  // Add more as needed
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      console.log("Received origin:", origin); // Add this line to log the origin
+      console.log("Received origin:", origin);
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -82,7 +80,7 @@ app.use(morgan("combined"));
 
 
 app.use("/api/auth", authRoutes);
-// app.use("/api/recipes", recipeRoutes);
+app.use("/api", recipeRoutes);
 app.use("/api", testimonialRoutes);
 app.use("/api/messages", messageRoutes);
 

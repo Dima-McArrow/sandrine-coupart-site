@@ -28,6 +28,9 @@ if (loginContainer) {
     fetchAndDisplayTestimonials();
     setInterval(fetchAndDisplayTestimonials, 600000); // Refresh every 10 minutes
   }
+  if (document.querySelector(".recipes_common_wrapper")) {
+    fetchAndDisplayRecipes(); // Call this function if we're on the recipes page
+  }
 });
 
 
@@ -108,6 +111,45 @@ async function fetchAndDisplayTestimonials() {
       }
     } catch (error) {
       console.error("Error fetching testimonials:", error);
+    }
+  }
+}
+
+
+async function fetchAndDisplayRecipes() {
+  const recipesContainer = document.querySelector(
+    ".recipes_container"
+  );
+  if (recipesContainer) {
+    console.log(
+      "Fetching recipes from:",
+      `${config.API_BASE_URL}/api/recipes`
+    );
+    try {
+      const response = await fetch(`${config.API_BASE_URL}/api/recipes`);
+      console.log("Response received:", response);
+      if (response.ok) {
+        const recipes = await response.json();
+        console.log("Recipes:", recipes);
+        recipesContainer.innerHTML = ""; // Clear previous testimonials
+        recipes.forEach((recipe) => {
+          const recipeCard = document.createElement("div");
+          recipeCard.className = "recipe_card";
+          recipeCard.innerHTML = `<img class="recipe_card_image" src="${recipe.image_url}" alt=""></img><h3 class="recipe_title">${recipe.title}</h3><p class="recipe_description">${recipe.description}</p><div class="recipe_card_button_wrapper">
+          <input type="button" value="Details" class="recipe_card_button button_nutrition">
+        </div>`;
+          recipesContainer.appendChild(recipeCard);
+        });
+      } else {
+        console.error(
+          "Failed to fetch recipes:",
+          response.status,
+          response.statusText
+        );
+        console.error("Response payload:", await response.text()); // To see the error message from the server
+      }
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
     }
   }
 }
