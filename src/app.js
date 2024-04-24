@@ -19,7 +19,7 @@ const messageRoutes = require("./routes/messageRoutes");
 
 app.set("trust proxy", 1);
 
-/* app.use(
+app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
@@ -34,9 +34,9 @@ app.set("trust proxy", 1);
       },
     },
   })
-); */
+);
 
-app.use(
+/* app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
@@ -53,7 +53,7 @@ app.use(
       },
     },
   })
-);
+); */
 
 const allowedOrigins = [
   "http://localhost:5500",
