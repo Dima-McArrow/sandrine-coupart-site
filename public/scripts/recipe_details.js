@@ -73,19 +73,19 @@ window.onload = function () {
           // Correct usage of review.rating in the switch statement
           switch (review.rating) {
             case 5:
-              image.src = "../../media/5of5.png"; // For the highest rating
+              image.src = "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/media/5of5.png"; // For the highest rating
               break;
             case 4:
-              image.src = "../../media/4of5.png";
+              image.src = "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/media/4of5.png";
               break;
             case 3:
-              image.src = "../../media/3of5.png";
+              image.src = "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/media/3of5.png";
               break;
             case 2:
-              image.src = "../../media/2of5.png";
+              image.src = "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/media/2of5.png";
               break;
             case 1:
-              image.src = "../../media/1of5.png"; // For the lowest rating
+              image.src = "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/media/1of5.png"; // For the lowest rating
               break;
             default:
               image.src = "default.png"; // Handle cases where rating might be outside expected values
