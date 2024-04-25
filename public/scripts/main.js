@@ -138,7 +138,9 @@ async function fetchAndDisplayRecipes() {
 
   const user = JSON.parse(localStorage.getItem("user"));
   if (user && user.userId) {
-    const userRecipesContainer = document.querySelector(".recipes_user_wrapper");
+    const userRecipesContainer = document.querySelector(
+      ".recipes_user_wrapper"
+    );
     const userRecipesPar = document.createElement("p");
     userRecipesPar.textContent = "Vos recettes personnalisées :";
     userRecipesContainer.prepend(userRecipesPar);
@@ -179,6 +181,13 @@ function updateRecipesDisplay(container, recipes) {
   recipes.forEach((recipe) => {
     const recipeCard = createRecipeCard(recipe);
     container.appendChild(recipeCard);
+
+    // Add event listener for the 'Details' button
+    const detailsButton = recipeCard.querySelector(".recipe_card_button");
+    detailsButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = `recipe_details.html?id=${recipe.id}`;
+    });
   });
 }
 
@@ -190,7 +199,7 @@ function createRecipeCard(recipe) {
     <h3 class="recipe_title">${recipe.title}</h3>
     <p class="recipe_description">${recipe.description}</p>
     <div class="recipe_card_button_wrapper">
-      <input type="button" value="Details" class="recipe_card_button button_nutrition" onclick="window.location.href='recipe_details.html?id=${recipe.id}'">
+      <input type="button" value="Details" class="recipe_card_button button_nutrition">
     </div>
   `;
   return recipeCard;
