@@ -32,7 +32,7 @@ router.post(
       const [result] = await db.execute(sql, values);
       res.json({
         message: "Message submitted successfully!",
-        redirect: "/ok.html",
+        redirect: "/ok.html"
       }); // Proper JSON response
     } catch (error) {
       console.error("Failed to insert into database:", error);

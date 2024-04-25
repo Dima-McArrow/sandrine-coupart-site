@@ -430,6 +430,51 @@ h2 {
   min-height: 70vh;
 }
 
+#testimonialFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 1rem auto 7rem auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #F3F3F7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s;
+  font-family: "Noto Sans", sans-serif;
+}
+#testimonialFormContainer input, #testimonialFormContainer textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #BDB9B3;
+  background-color: #F3F3F7;
+  transition: all 0.5s;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  margin-bottom: 2rem;
+}
+#testimonialFormContainer .reviewForm__submit {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #609A7D;
+  color: #0C0920;
+  font-family: "Balsamiq Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+#testimonialFormContainer .reviewForm__submit:hover {
+  background-color: #0C0920;
+  color: #609A7D;
+}
+
 body {
   overflow-x: hidden;
   width: 100%;
@@ -649,11 +694,13 @@ body {
 
 #recipesList {
   margin-top: 9rem;
-  margin-bottom: 5rem;
+  margin-bottom: 9rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 13rem;
+  justify-content: center;
   align-items: center;
+  padding: 0 5rem 0 5rem;
 }
 #recipesList .recipe_card {
   width: 30rem;
@@ -663,7 +710,7 @@ body {
   position: relative;
   padding-top: 18.5rem;
   text-align: center;
-  margin-bottom: 13rem;
+  margin-bottom: 3rem;
 }
 #recipesList .recipe_card_image {
   width: 70%;
@@ -719,6 +766,76 @@ body {
   text-align: center;
 }
 
+#recipesUserList {
+  margin-top: 9rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5rem 0 5rem;
+}
+#recipesUserList .recipe_card {
+  width: 30rem;
+  height: 30rem;
+  border: 1px solid #609A7D;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  padding-top: 18.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+#recipesUserList .recipe_card_image {
+  width: 70%;
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 13px solid #609A7D;
+}
+#recipesUserList .recipe_title {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-size: 2rem;
+  color: #609A7D;
+  margin-top: 1rem;
+}
+#recipesUserList .recipe_description {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1rem;
+  color: #0C0920;
+  margin-top: 1rem;
+}
+#recipesUserList .recipe_card_button_wrapper {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 20px;
+  background-color: #609A7D;
+  border-radius: 5px;
+  transition: all 0.5s;
+}
+#recipesUserList .recipe_card_button_wrapper .recipe_card_button {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-size: 16px;
+  color: #0C0920;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.5s;
+  padding: 20px 20px;
+  border: none;
+  background-color: #609A7D;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#recipesUserList .recipe_card_button_wrapper .recipe_card_button:hover {
+  color: #609A7D;
+  background-color: #0C0920;
+}
+
 body {
   overflow-x: hidden;
   width: 100%;
@@ -726,6 +843,16 @@ body {
 
 .recipes_title {
   margin-bottom: 2rem;
+  margin-top: -2rem;
+}
+
+.recipes_user_wrapper p {
+  font-family: "Reenie Beanie", cursive;
+  font-size: 3rem;
+  color: #DC9A7D;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  text-align: center;
 }
 
 body {
@@ -800,15 +927,124 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  margin: 0 auto;
+  padding: 2rem 15rem 7rem 15rem;
+  margin: 0 auto 5rem auto;
   width: 80%;
   align-items: center;
   justify-content: center;
+  color: #0C0920;
+  font-family: "Noto Sans", sans-serif;
+  border: 1px solid #BDB9B3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 #recipeDetailContainer .recipe_details_pic {
   width: 50%;
   height: auto;
+}
+#recipeDetailContainer h2 {
+  color: #609A7D;
+  text-align: center;
+}
+#recipeDetailContainer h2.recipes_common_title {
+  font-family: "Reenie Beanie", cursive;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #DC9A7D;
+  margin-left: 50px;
+  text-align: center;
+}
+#recipeDetailContainer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+#recipeDetailContainer li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+#reviewsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  margin: 1rem auto 5rem auto;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  width: 13rem;
+  gap: 10px;
+  padding: 20px;
+  align-items: center;
+  background-color: #F3F3F7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 1rem auto 7rem auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #F3F3F7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s;
+  font-family: "Noto Sans", sans-serif;
+}
+.reviewForm input, .reviewForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #BDB9B3;
+  background-color: #F3F3F7;
+  transition: all 0.5s;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+}
+.reviewForm .reviewForm__submit {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #609A7D;
+  color: #0C0920;
+  font-family: "Balsamiq Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.reviewForm .reviewForm__submit:hover {
+  background-color: #0C0920;
+  color: #609A7D;
+}
+
+.review_send_title {
+  font-family: "Reenie Beanie", cursive;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #DC9A7D;
+  margin-left: 50px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=styles.css.map */

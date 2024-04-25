@@ -18,13 +18,13 @@ window.onload = function () {
           "recipeDetailContainer"
         );
         recipeContainer.innerHTML = `
-          <h1>${data.title}</h1>
+          <h2 class="recipes_common_title">${data.title}</h2>
           <img class="recipe_details_pic" src="${data.image_url}" alt="${data.title}">
           <p>${data.description}</p>
           <h2>Preparation Time</h2><p>${data.prep_time} min</p>
           <h2>Cook Time</h2><p>${data.cook_time} min</p>
           <h2>Rest Time</h2><p>${data.rest_time} min</p>
-          <h2>Ingredients</h2>
+          <h2>Ingrédients</h2>
         `;
         const ingredientsList = document.createElement("ul");
         data.ingredients.forEach((ingredient) => {
@@ -38,7 +38,9 @@ window.onload = function () {
           ingredientsList.appendChild(ingredientItem);
         });
         recipeContainer.appendChild(ingredientsList);
-
+        const stepListPar = document.createElement("h2");
+        stepListPar.textContent = "Étapes";
+        recipeContainer.appendChild(stepListPar);
         const stepsList = document.createElement("ul");
         data.steps.forEach((step) => {
           const stepItem = document.createElement("li");
@@ -46,6 +48,31 @@ window.onload = function () {
           stepsList.appendChild(stepItem);
         });
         recipeContainer.appendChild(stepsList);
+        
+        const dietTypes = document.createElement("div");
+        dietTypes.className = "diet_types";
+        dietTypes.innerHTML = "<h2>Types de régime</h2>";
+        const dietList = document.createElement("ul");
+        dietTypes.appendChild(dietList);
+        data.diet_types.forEach((type) => {
+          const dietType = document.createElement("li");
+          dietType.textContent = type;
+          dietTypes.appendChild(dietType);
+        });
+        recipeContainer.appendChild(dietTypes);
+
+        const allergens = document.createElement("div");
+        allergens.className = "allergens";
+        allergens.innerHTML = "<h2>Allergènes</h2>";
+        const allergensList = document.createElement("ul");
+        allergens.appendChild(allergensList);
+        data.allergens.forEach((allergen) => {
+          const allergenItem = document.createElement("li");
+          allergenItem.textContent = allergen;
+          allergensList.appendChild(allergenItem);
+        });
+        recipeContainer.appendChild(allergens);
+
       })
       .catch((error) => {
         console.error("Failed to fetch recipe details:", error);
@@ -60,17 +87,19 @@ window.onload = function () {
       .then((response) => response.json())
       .then((data) => {
         const reviewsContainer = document.getElementById("reviewsContainer");
-        reviewsContainer.innerHTML = ""; // Clear previous content
+        reviewsContainer.innerHTML = "";
         data.forEach((review) => {
           const reviewElement = document.createElement("div");
           reviewElement.className = "review";
 
           // Create an image element for the rating
+          const imageWrapper = document.createElement("div");
+          imageWrapper.classList.add("rating-image_wrapper");
           const image = document.createElement("img");
           image.alt = `${review.rating} stars`;
           image.style.width = "100px";
+          imageWrapper.appendChild(image);
 
-          // Correct usage of review.rating in the switch statement
           switch (review.rating) {
             case 5:
               image.src = "https://sandrine-coupart-site.s3.eu-west-3.amazonaws.com/media/5of5.png"; // For the highest rating

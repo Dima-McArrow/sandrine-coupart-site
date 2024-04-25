@@ -15,15 +15,16 @@
       </div>
     </header>
     <div id="recipeDetailContainer">
-      <!-- Details will be injected here by JavaScript -->
     </div>
-    <div id="reviewsContainer"></div>
+    <h3 class="review_send_title">Avis des utilisateurs</h3>
+    <div id="reviewsContainer">
+    </div>
     <div id="reviewFormContainer">
-      <h3>Leave a Review</h3>
-      <form id="reviewForm">
+      <h3 class="review_send_title">Laissez un avis</h3>
+      <form id="reviewForm" class="reviewForm">
         <input type="hidden" id="userId" name="userId" value="">
         <input type="hidden" id="recipeId" name="recipeId" value="">
-        <label for="rating">Rating:</label>
+        <label for="rating">Note :</label>
         <select name="rating" id="rating">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -31,9 +32,9 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <label for="comment">Comment:</label>
-        <textarea id="comment" name="comment"></textarea>
-        <button type="submit">Submit Review</button>
+        <label for="comment">Commentaire :</label>
+        <textarea class="reviewForm__textarea" id="comment" name="comment"></textarea>
+        <button class="reviewForm__submit" type="submit">Soumettre l'avis</button>
       </form>
     </div>
     <footer>

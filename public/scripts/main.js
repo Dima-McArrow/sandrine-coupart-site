@@ -31,19 +31,36 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAndDisplayRecipes(); // Call this function if we're on the recipes page
     setInterval(fetchAndDisplayRecipes, 300000);
   }
+
+  const testimonialForm = document.getElementById("testimonialForm");
+  if (testimonialForm) {
+    testimonialForm.addEventListener("submit", handleTestimonialSubmit);
+  }
 });
 
 function updateUserStatus() {
   try {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.name) {
+    const testimonialFormContainer = document.getElementById(
+      "testimonialFormContainer"
+    );
+    if (user && user.userId) {
       displayLoggedInUser(user);
+      if (testimonialFormContainer) {
+        testimonialFormContainer.style.display = "block"; // Show the form
+      }
     } else {
       displayLoginLink();
+      if (testimonialFormContainer) {
+        testimonialFormContainer.style.display = "none"; // Hide the form
+      }
     }
   } catch (e) {
     console.error("Error parsing user data:", e);
     displayLoginLink();
+    if (testimonialFormContainer) {
+      testimonialFormContainer.style.display = "none";
+    }
   }
 }
 
@@ -116,53 +133,67 @@ async function fetchAndDisplayTestimonials() {
 
 async function fetchAndDisplayRecipes() {
   const recipesContainer = document.querySelector(".recipes_container");
-  if (recipesContainer) {
-    console.log("Fetching recipes from:", `${config.API_BASE_URL}/api/recipes`);
-    try {
-      const response = await fetch(`${config.API_BASE_URL}/api/recipes`);
-      console.log("Response received:", response);
-      if (response.ok) {
-        const recipes = await response.json();
-        console.log("Recipes:", recipes);
+  const recipesUserContainer = document.getElementById("recipesUserList"); // Container for user-specific recipes
+  fetchGeneralRecipes(recipesContainer); // Fetch general recipes for all users
 
-        // Shuffle the recipes array and slice the first 3 items
-        const shuffled = recipes.sort(() => 0.5 - Math.random());
-        const selectedRecipes = shuffled.slice(0, 3);
-
-        recipesContainer.innerHTML = ""; // Clear previous recipes
-        selectedRecipes.forEach((recipe) => {
-          const recipeCard = document.createElement("div");
-          recipeCard.className = "recipe_card";
-          recipeCard.innerHTML = `
-            <img class="recipe_card_image" src="${recipe.image_url}" alt="${recipe.title}">
-            <h3 class="recipe_title">${recipe.title}</h3>
-            <p class="recipe_description">${recipe.description}</p>
-            <div class="recipe_card_button_wrapper">
-            <input type="button" value="Details" class="recipe_card_button button_nutrition">
-            </div>
-          `;
-          recipesContainer.appendChild(recipeCard);
-
-          // Event listener for the 'Details' button
-          const detailsButton = recipeCard.querySelector(".recipe_card_button");
-          detailsButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href = `recipe_details.html?id=${recipe.id}`;
-          });
-        });
-      } else {
-        console.error(
-          "Failed to fetch recipes:",
-          response.status,
-          response.statusText
-        );
-        console.error("Response payload:", await response.text()); // To see the error message from the server
-      }
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-    }
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.userId) {
+    const userRecipesContainer = document.querySelector(".recipes_user_wrapper");
+    const userRecipesPar = document.createElement("p");
+    userRecipesPar.textContent = "Vos recettes personnalisées :";
+    userRecipesContainer.prepend(userRecipesPar);
+    fetchUserSpecificRecipes(recipesUserContainer, user.userId); // Fetch personalized recipes if user is logged in
   }
+}
+
+function fetchGeneralRecipes(container) {
+  console.log(
+    "Fetching general recipes from:",
+    `${config.API_BASE_URL}/api/recipes`
+  );
+  fetch(`${config.API_BASE_URL}/api/recipes`)
+    .then((response) =>
+      response.ok ? response.json() : Promise.reject("Failed to load")
+    )
+    .then((recipes) => updateRecipesDisplay(container, recipes))
+    .catch((error) => console.error("Error fetching general recipes:", error));
+}
+
+function fetchUserSpecificRecipes(container, userId) {
+  console.log(
+    "Fetching user-specific recipes from:",
+    `${config.API_BASE_URL}/api/userRecipes/${userId}`
+  );
+  fetch(`${config.API_BASE_URL}/api/userRecipes/${userId}`)
+    .then((response) =>
+      response.ok ? response.json() : Promise.reject("Failed to load")
+    )
+    .then((recipes) => updateRecipesDisplay(container, recipes))
+    .catch((error) =>
+      console.error("Error fetching user-specific recipes:", error)
+    );
+}
+
+function updateRecipesDisplay(container, recipes) {
+  container.innerHTML = ""; // Clear previous content
+  recipes.forEach((recipe) => {
+    const recipeCard = createRecipeCard(recipe);
+    container.appendChild(recipeCard);
+  });
+}
+
+function createRecipeCard(recipe) {
+  const recipeCard = document.createElement("div");
+  recipeCard.className = "recipe_card";
+  recipeCard.innerHTML = `
+    <img class="recipe_card_image" src="${recipe.image_url}" alt="${recipe.title}">
+    <h3 class="recipe_title">${recipe.title}</h3>
+    <p class="recipe_description">${recipe.description}</p>
+    <div class="recipe_card_button_wrapper">
+      <input type="button" value="Details" class="recipe_card_button button_nutrition" onclick="window.location.href='recipe_details.html?id=${recipe.id}'">
+    </div>
+  `;
+  return recipeCard;
 }
 
 const returnButton = document.querySelector(".button_return");
@@ -182,4 +213,29 @@ function getCookie(name) {
     }
   }
   return null;
+}
+
+function handleTestimonialSubmit(e) {
+  e.preventDefault();
+  const testimonialText = document.getElementById("testimonialText").value;
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user && user.userId) {
+    fetch(`${config.API_BASE_URL}/api/testimonials`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: user.userId,
+        testimonial: testimonialText,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert("Testimonial submitted!");
+        document.getElementById("testimonialText").value = ""; // Clear the form
+      })
+      .catch((error) => console.error("Error submitting testimonial:", error));
+  } else {
+    alert("You must be logged in to submit a testimonial.");
+  }
 }

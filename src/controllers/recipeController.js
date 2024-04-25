@@ -163,3 +163,25 @@ exports.getRecipeById = async (req, res) => {
     });
   }
 };
+
+exports.getUserSpecificRecipes = async (userId) => {
+  const sql = `
+      SELECT DISTINCT Recipes.*
+      FROM Recipes
+      JOIN RecipeDietTypes ON Recipes.id = RecipeDietTypes.recipe_id
+      JOIN UserDietTypes ON RecipeDietTypes.diet_type_id = UserDietTypes.diet_type_id
+      WHERE UserDietTypes.user_id = ?
+      AND Recipes.id NOT IN (
+          SELECT RecipeAllergens.recipe_id
+          FROM RecipeAllergens
+          JOIN UserAllergens ON RecipeAllergens.allergen_id = UserAllergens.allergen_id
+          WHERE UserAllergens.user_id = ?
+      )
+  `;
+  try {
+      const [recipes] = await db.execute(sql, [userId, userId]);
+      return recipes;
+  } catch (error) {
+      throw new Error('Failed to fetch recipes: ' + error.message);
+  }
+}
