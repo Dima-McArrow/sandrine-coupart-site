@@ -17,6 +17,8 @@ const app = express();
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 
+const reviewRoutes = require("./routes/reviewRoutes");
+
 app.set("trust proxy", 1);
 
 app.use(
@@ -101,6 +103,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api", recipeRoutes);
 app.use("/api", testimonialRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api", reviewRoutes);
 
 // After all other routes
 app.get("/", (req, res) => {

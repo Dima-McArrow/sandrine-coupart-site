@@ -308,6 +308,11 @@ div.services_cards_container {
   font-weight: bold;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
 body {
   background-color: #F3F3F7;
   overflow-x: hidden;
@@ -342,6 +347,7 @@ h2 {
 
 .img_container {
   position: relative;
+  width: 100%;
 }
 
 .the_pres_one {
