@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          window.location.href = "/ok.html";
+          window.location.href = "/ok_register.html";
         } else {
           alert("Registration failed: " + data.message);
         }
