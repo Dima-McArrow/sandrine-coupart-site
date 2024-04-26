@@ -19,6 +19,9 @@ const messageRoutes = require("./routes/messageRoutes");
 
 const reviewRoutes = require("./routes/reviewRoutes");
 
+const dietRoutes = require('./routes/dietRoutes');
+const allergenRoutes = require('./routes/allergenRoutes');
+
 app.set("trust proxy", 1);
 
 app.use(
@@ -104,6 +107,8 @@ app.use("/api", recipeRoutes);
 app.use("/api", testimonialRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api", reviewRoutes);
+app.use('/api', dietRoutes);
+app.use('/api', allergenRoutes);
 
 
 // After all other routes
